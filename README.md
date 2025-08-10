@@ -4,6 +4,7 @@
 
 ## 개발 참여자
 
+- [엄진영](https://github.com/eomjinyoung)
 - [엄지혜](https://github.com/eomjihye03)
 
 
