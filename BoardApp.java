@@ -1,5 +1,5 @@
 public class BoardApp {
   public static void main(String[] args) {
-    System.out.println("Welcome to the Board App!");
+    System.out.println("[게시글 관리 시스템]");
   }
 }
