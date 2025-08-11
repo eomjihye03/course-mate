@@ -18,7 +18,7 @@ java {
 }
 
 application {
-    mainClass = 'coursemate.MemberApp'
+    mainClass = 'coursemate.BoardApp'
 }
 
 tasks.named('test') {
