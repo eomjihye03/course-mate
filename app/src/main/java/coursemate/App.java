@@ -6,13 +6,12 @@ public class App {
 
   public static void main(String[] args) throws Exception {
     System.out.println("강의 관리 시스템 '코스메이트'");
+    Scanner scanner = new Scanner(System.in);
 
     MemberHandler memberHandler = new MemberHandler();
-    BoardHandler boardHandler = new BoardHandler();
+    BoardHandler boardHandler = new BoardHandler(scanner);
 
     printMainMenu();
-
-    Scanner scanner = new Scanner(System.in);
 
     while (true) {
       System.out.print("메인> ");
