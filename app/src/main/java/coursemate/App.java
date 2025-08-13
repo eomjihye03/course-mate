@@ -8,7 +8,7 @@ public class App {
     System.out.println("강의 관리 시스템 '코스메이트'");
     Scanner scanner = new Scanner(System.in);
 
-    MemberHandler memberHandler = new MemberHandler();
+    MemberHandler memberHandler = new MemberHandler(scanner);
     BoardHandler boardHandler = new BoardHandler(scanner);
 
     printMainMenu();
