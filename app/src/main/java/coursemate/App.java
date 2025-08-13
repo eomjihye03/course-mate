@@ -15,7 +15,7 @@ public class App {
     Scanner scanner = new Scanner(System.in);
 
     while (true) {
-      System.out.print("메뉴> ");
+      System.out.print("메인> ");
       String input = scanner.nextLine();
       if (input.equals("0")) {
         break;
@@ -23,6 +23,8 @@ public class App {
         memberHandler.execute();
       } else if (input.equals("2")) {
         boardHandler.execute();
+      } else if (input.equals("menu")) {
+        printMainMenu();
       } else {
         System.out.println("잘못된 메뉴입니다. 다시 선택하세요.");
         continue;
