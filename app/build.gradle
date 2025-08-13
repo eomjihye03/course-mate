@@ -1,5 +1,9 @@
 plugins {
-    id 'application'
+    id 'application' // 'java' 플러그인을 포함
+}
+
+application {
+    mainClass = 'coursemate.BoardApp'
 }
 
 repositories {
@@ -17,10 +21,11 @@ java {
     }
 }
 
-application {
-    mainClass = 'coursemate.BoardApp'
-}
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+tasks.named('jar') {
+    archiveFileName = "${rootProject.name}.jar"
 }
