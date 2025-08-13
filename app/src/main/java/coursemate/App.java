@@ -7,7 +7,8 @@ public class App {
   public static void main(String[] args) throws Exception {
     System.out.println("강의 관리 시스템 '코스메이트'");
 
-    MemberApp memberApp = new MemberApp();
+    MemberHandler memberHandler = new MemberHandler();
+    BoardHandler boardHandler = new BoardHandler();
 
     printMainMenu();
 
@@ -19,9 +20,9 @@ public class App {
       if (input.equals("0")) {
         break;
       } else if (input.equals("1")) {
-        MemberApp.service();
+        memberHandler.execute();
       } else if (input.equals("2")) {
-        BoardApp.service();
+        boardHandler.execute();
       } else {
         System.out.println("잘못된 메뉴입니다. 다시 선택하세요.");
         continue;
