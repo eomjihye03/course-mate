@@ -7,6 +7,8 @@ public class App {
   public static void main(String[] args) throws Exception {
     System.out.println("강의 관리 시스템 '코스메이트'");
 
+    MemberApp memberApp = new MemberApp();
+
     printMainMenu();
 
     Scanner scanner = new Scanner(System.in);
