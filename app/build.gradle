@@ -3,7 +3,7 @@ plugins {
 }
 
 application {
-    mainClass = 'coursemate.BoardApp'
+    mainClass = 'coursemate.App'
 }
 
 
@@ -29,4 +29,8 @@ tasks.named('test') {
 
 tasks.named('jar') {
     archiveFileName = "${rootProject.name}.jar"
+}
+
+tasks.named('run') {
+    standardInput = System.in
 }
