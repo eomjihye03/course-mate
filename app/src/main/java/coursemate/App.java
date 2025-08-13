@@ -10,6 +10,7 @@ public class App {
     printMainMenu();
 
     Scanner scanner = new Scanner(System.in);
+    BoardHandler boardHandler = new BoardHandler();
 
     while (true) {
       System.out.print("메뉴> ");
@@ -19,7 +20,7 @@ public class App {
       } else if (input.equals("1")) {
         MemberApp.service();
       } else if (input.equals("2")) {
-        BoardApp.service();
+        boardHandler.excute();
       } else {
         System.out.println("잘못된 메뉴입니다. 다시 선택하세요.");
         continue;
