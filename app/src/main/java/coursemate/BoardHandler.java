@@ -10,8 +10,6 @@ public class BoardHandler implements MenuHandler {
   }
 
   public void execute() { // instance method가 되어야함. public을 생략하면 pakage 멤버가 됨.
-    System.out.println("[게시글 관리 시스템]");
-    System.out.println("게시글 관리 시스템에 오신 걸 환영합니다.");
     printMainMenu();
 
     label:
@@ -48,6 +46,7 @@ public class BoardHandler implements MenuHandler {
   }
 
   static void printMainMenu() {
+    System.out.println("게시글관리:");
     System.out.println("1. 게시글 추가");
     System.out.println("2. 게시글 목록");
     System.out.println("3. 게시글 조회");
