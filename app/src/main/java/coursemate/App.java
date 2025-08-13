@@ -19,7 +19,7 @@ public class App {
       } else if (input.equals("1")) {
         MemberApp.service();
       } else if (input.equals("2")) {
-        // 게시글 관리 시스템을 호출하는 부분
+        BoardApp.service();
       } else {
         System.out.println("잘못된 메뉴입니다. 다시 선택하세요.");
         continue;
