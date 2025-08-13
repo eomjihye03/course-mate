@@ -1,6 +1,7 @@
 plugins {
-    id 'application'
+    id 'application' // 'java' 플러그인 자동 포함시킨다.
 }
+
 
 repositories {
     mavenCentral()
@@ -23,4 +24,8 @@ application {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+tasks.named('jar') {
+    archiveFileName = "${rootProject.name}.jar"
 }
