@@ -2,6 +2,10 @@ plugins {
     id 'application' // 'java' 플러그인 자동 포함시킨다.
 }
 
+application {
+    mainClass = 'coursemate.BoardApp'
+}
+
 
 repositories {
     mavenCentral()
@@ -18,9 +22,6 @@ java {
     }
 }
 
-application {
-    mainClass = 'coursemate.BoardApp'
-}
 
 tasks.named('test') {
     useJUnitPlatform()
