@@ -9,6 +9,7 @@ public class App {
     Scanner scanner = new Scanner(System.in);
 
     MemberHandler memberHandler = new MemberHandler(scanner);
+
     BoardHandler boardHandler = new BoardHandler(scanner);
 
     printMainMenu();
