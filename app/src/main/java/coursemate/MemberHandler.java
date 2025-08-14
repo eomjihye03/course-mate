@@ -10,12 +10,8 @@ public class MemberHandler implements MenuHandler {
 
   private static final int MAX_SIZE = 100;
 
-  private final int[] no = new int[MAX_SIZE];
-  private final String[] name = new String[MAX_SIZE];
-  private final String[] email = new String[MAX_SIZE];
-  private final String[] phone = new String[MAX_SIZE];
-  private final String[] password = new String[MAX_SIZE];
-  private final LocalDateTime[] registeredDate = new LocalDateTime[MAX_SIZE];
+  // Member 인스턴스 주소를 다을 레퍼런스 배열을 생성
+  private final Member[] members = new Member[MAX_SIZE];
   private int size = 0;
   private int nextNo = 1;
 
@@ -75,22 +71,25 @@ public class MemberHandler implements MenuHandler {
       return;
     }
 
+    Member member = new Member();
+
     System.out.print("이름? ");
-    name[size] = scanner.nextLine();
+    member.name = scanner.nextLine();
 
     System.out.print("이메일? ");
-    email[size] = scanner.nextLine();
+    member.email = scanner.nextLine();
 
     System.out.print("암호? ");
-    password[size] = scanner.nextLine();
+    member.password = scanner.nextLine();
 
     System.out.print("전화번호? ");
-    phone[size] = scanner.nextLine();
+    member.phone = scanner.nextLine();
 
-    no[size] = nextNo++; // 1부터 시작하는 회원 번호 부여
-    registeredDate[size] = LocalDateTime.now(); // 가입일 저장
+    member.no = nextNo++; // 1부터 시작하는 회원 번호 부여
+    member.registeredDate = LocalDateTime.now(); // 가입일 저장
 
-    size++;
+    members[size++] = member; // 배열에 회원 정보를 담고 있는 인스턴스 주소를 저장
+
     System.out.println("회원을 등록했습니다.");
   }
 
@@ -98,8 +97,9 @@ public class MemberHandler implements MenuHandler {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     System.out.println("번호\t이름\t전화번호\t\t등록일");
     for (int i = 0; i < size; i++) {
+      Member m = members[i];
       System.out.printf(
-          "%d\t%s\t%s\t%s\n", no[i], name[i], phone[i], registeredDate[i].format(formatter));
+          "%d\t%s\t%s\t%s\n", m.no, m.name, m.phone, m.registeredDate.format(formatter));
     }
   }
 
@@ -115,7 +115,7 @@ public class MemberHandler implements MenuHandler {
 
     int index = -1;
     for (int i = 0; i < size; i++) {
-      if (no[i] == inputNo) {
+      if (members[i].no == inputNo) {
         index = i;
         break;
       }
@@ -126,12 +126,14 @@ public class MemberHandler implements MenuHandler {
       return;
     }
 
+    Member member = members[index];
+
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    System.out.printf("번호: %d\n", no[index]);
-    System.out.printf("이름: %s\n", name[index]);
-    System.out.printf("이메일: %s\n", email[index]);
-    System.out.printf("전화번호: %s\n", phone[index]);
-    System.out.printf("등록일: %s\n", registeredDate[index].format(formatter));
+    System.out.printf("번호: %d\n", member.no);
+    System.out.printf("이름: %s\n", member.name);
+    System.out.printf("이메일: %s\n", member.email);
+    System.out.printf("전화번호: %s\n", member.phone);
+    System.out.printf("등록일: %s\n", member.registeredDate.format(formatter));
   }
 
   private void update() {
@@ -146,7 +148,7 @@ public class MemberHandler implements MenuHandler {
 
     int index = -1;
     for (int i = 0; i < size; i++) {
-      if (no[i] == inputNo) {
+      if (members[i].no == inputNo) {
         index = i;
         break;
       }
@@ -157,11 +159,12 @@ public class MemberHandler implements MenuHandler {
       return;
     }
 
-    // 기존 값 복사
-    String tempName = name[index];
-    String tempEmail = email[index];
-    String tempPhone = phone[index];
-    String tempPassword = password[index];
+    Member member = members[index];
+
+    String tempName = member.name;
+    String tempEmail = member.email;
+    String tempPhone = member.phone;
+    String tempPassword = member.password;
 
     System.out.printf("이름(%s)? ", tempName);
     String newName = scanner.nextLine();
@@ -191,10 +194,10 @@ public class MemberHandler implements MenuHandler {
     String answer = scanner.nextLine();
 
     if (answer.equalsIgnoreCase("yes")) {
-      name[index] = tempName;
-      email[index] = tempEmail;
-      phone[index] = tempPhone;
-      password[index] = tempPassword;
+      member.name = tempName;
+      member.email = tempEmail;
+      member.phone = tempPhone;
+      member.password = tempPassword;
       System.out.println("회원 정보를 변경했습니다.");
     } else {
       System.out.println("변경이 취소되었습니다.");
@@ -213,7 +216,7 @@ public class MemberHandler implements MenuHandler {
 
     int index = -1;
     for (int i = 0; i < size; i++) {
-      if (no[i] == inputNo) {
+      if (members[i].no == inputNo) {
         index = i;
         break;
       }
@@ -229,12 +232,7 @@ public class MemberHandler implements MenuHandler {
 
     if (answer.equalsIgnoreCase("yes")) {
       for (int i = index; i < size - 1; i++) {
-        no[i] = no[i + 1];
-        name[i] = name[i + 1];
-        email[i] = email[i + 1];
-        phone[i] = phone[i + 1];
-        password[i] = password[i + 1];
-        registeredDate[i] = registeredDate[i + 1];
+        members[i] = members[i + 1];
       }
       size--;
       System.out.println("회원을 삭제했습니다.");
