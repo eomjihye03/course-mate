@@ -107,4 +107,11 @@ class MemberLinkedList {
   int size() {
     return size; // 현재 저장된 회원 수 반환
   }
+
+  // 중첩 클래스: static nested class
+  private static class MemberNode {
+    public Member value;
+    public MemberNode next;
+    public MemberNode prev;
+  }
 }

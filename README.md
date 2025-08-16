@@ -92,3 +92,8 @@
 
 - MemberList 클래스를 MemberLinkedList 클래스로 변경한다.
 - BoardList 클래스를 BoardLinkedList 클래스로 변경한다.
+
+### 10. 스태틱 중첩 클래스 활용하기
+
+- MemberNode 클래스를 MemberLinkedList 클래스의 스태틱 중첩 클래스로 변경한다.
+- BoardNode 클래스를 BoardLinkedList 클래스의 스태틱 중첩 클래스로 변경한다.
