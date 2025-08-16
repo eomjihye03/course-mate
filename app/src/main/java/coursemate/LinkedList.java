@@ -1,12 +1,14 @@
 package coursemate;
 
-public class LinkedList {
-  private int size = 0;
-  private Node head;
-  private Node tail;
+import java.lang.reflect.Array;
 
-  void add(Object value) {
-    Node node = new Node();
+public class LinkedList<E> {
+  private int size = 0;
+  private Node<E> head;
+  private Node<E> tail;
+
+  void add(E value) {
+    Node<E> node = new Node<>();
     node.value = value;
 
     if (head == null) {
@@ -29,12 +31,25 @@ public class LinkedList {
     return result;
   }
 
-  Object get(int i) {
+  @SuppressWarnings("unchecked")
+  E[] list(E[] array) {
+    if (array.length < size) {
+      array = (E[]) Array.newInstance(array.getClass().getComponentType(), size);
+    }
+    Node<E> node = head;
+    for (int i = 0; i < size; i++) {
+      array[i] = node.value;
+      node = node.next;
+    }
+    return array;
+  }
+
+  E get(int i) {
     if (i < 0 || i >= size) {
       return null; // 인덱스가 범위를 벗어나면 null 반환
     }
 
-    Node node = head; // 처음 노드부터 시작
+    Node<E> node = head; // 처음 노드부터 시작
     for (int x = 0; x < i; x++) {
       node = node.next; // i번째 노드로 이동
     }
@@ -42,11 +57,11 @@ public class LinkedList {
     return node.value; // 해당 노드의 값을 반환
   }
 
-  boolean set(int i, Object value) {
+  boolean set(int i, E value) {
     if (i < 0 || i >= size) {
       return false; // 인덱스가 범위를 벗어나면 false 반환
     }
-    Node node = head; // 처음 노드부터 시작
+    Node<E> node = head; // 처음 노드부터 시작
     for (int x = 0; x < i; x++) {
       node = node.next; // i번째 노드로 이동
     }
@@ -69,7 +84,7 @@ public class LinkedList {
       tail = tail.prev; // 마지막 노드 삭제 시 tail을 이전 노드로 이동
       tail.next = null; // 새로운 tail의 next를 null로 설정
     } else {
-      Node node = head; // 처음 노드부터 시작
+      Node<E> node = head; // 처음 노드부터 시작
       for (int x = 0; x < i; x++) {
         node = node.next; // i번째 노드로 이동
       }
@@ -84,9 +99,9 @@ public class LinkedList {
     return size; // 현재 저장된 게시글 수 반환
   }
 
-  private static class Node {
-    public Object value;
-    public Node next;
-    public Node prev;
+  private static class Node<T> {
+    public T value;
+    public Node<T> next;
+    public Node<T> prev;
   }
 }

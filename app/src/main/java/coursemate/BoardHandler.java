@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class BoardHandler implements MenuHandler {
   Scanner scanner;
   private int nextNo = 1;
-  LinkedList boards = new LinkedList(); // 게시글 목록을 관리하는 BoardList 객체
+  LinkedList<Board> boards = new LinkedList<>(); // 게시글 목록을 관리하는 BoardList 객체
 
   BoardHandler(Scanner scanner) {
     this.scanner = scanner;
@@ -76,7 +76,7 @@ public class BoardHandler implements MenuHandler {
   }
 
   private void list() {
-    Object[] list = boards.list(); // 게시글 목록을 가져옵니다.
+    Board[] list = boards.list(new Board[0]); // 게시글 목록을 가져옵니다.
 
     if (list == null) {
       System.out.println("등록된 게시글이 없습니다.");
@@ -89,8 +89,7 @@ public class BoardHandler implements MenuHandler {
 
       DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-      for (Object obj : list) {
-        Board post = (Board) obj; // Object를 Board로 캐스팅
+      for (Board post : list) {
         System.out.printf(
             "%-4d | %-18s | %s\n", post.no, post.title, post.date.format(dateFormatter));
       }
@@ -115,7 +114,7 @@ public class BoardHandler implements MenuHandler {
     Board board = null;
     int index = -1;
     for (int i = 0; i < boards.size(); i++) {
-      board = (Board) boards.get(i);
+      board = boards.get(i);
       if (board.no == postNo) {
         index = i;
         break;
@@ -152,10 +151,10 @@ public class BoardHandler implements MenuHandler {
     }
 
     int index = -1;
-    Object[] list = boards.list();
+    Board[] list = boards.list(new Board[0]);
 
     for (int i = 0; i < list.length; i++) {
-      if (((Board) list[i]).no == postNo) {
+      if (list[i].no == postNo) {
         index = i;
         break;
       }
@@ -166,7 +165,7 @@ public class BoardHandler implements MenuHandler {
       return;
     }
 
-    Board updatedPost = (Board) boards.get(index);
+    Board updatedPost = boards.get(index);
 
     System.out.println("==================================");
     System.out.println("현재 제목: " + updatedPost.title);
@@ -219,7 +218,7 @@ public class BoardHandler implements MenuHandler {
     int index = -1;
 
     for (int i = 0; i < boards.size(); i++) {
-      Board board = (Board) boards.get(i);
+      Board board = boards.get(i);
       if (board.no == postNo) {
         index = i;
         break;
