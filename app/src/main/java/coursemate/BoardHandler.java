@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class BoardHandler implements MenuHandler {
   Scanner scanner;
   private int nextNo = 1;
-  BoardList boards = new BoardList(); // 게시글 목록을 관리하는 BoardList 객체
+  BoardLinkedList boards = new BoardLinkedList(); // 게시글 목록을 관리하는 BoardList 객체
 
   BoardHandler(Scanner scanner) {
     this.scanner = scanner;
