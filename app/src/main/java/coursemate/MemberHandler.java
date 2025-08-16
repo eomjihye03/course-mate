@@ -8,7 +8,7 @@ public class MemberHandler implements MenuHandler {
 
   Scanner scanner;
 
-  private final MemberList members = new MemberList();
+  private final MemberLinkedList members = new MemberLinkedList();
   private int nextNo = 1;
 
   MemberHandler(Scanner scanner) {
