@@ -5,9 +5,9 @@ public class LinkedList {
   private Node head;
   private Node tail;
 
-  void add(Board board) {
+  void add(Object value) {
     Node node = new Node();
-    node.value = board;
+    node.value = value;
 
     if (head == null) {
       tail = head = node;
