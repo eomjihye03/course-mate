@@ -2,6 +2,7 @@ package coursemate;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class BoardHandler implements MenuHandler {
@@ -76,7 +77,7 @@ public class BoardHandler implements MenuHandler {
   }
 
   private void list() {
-    Board[] list = boards.list(new Board[0]); // 게시글 목록을 가져옵니다.
+    Board[] list = boards.toArray(new Board[0]); // 게시글 목록을 가져옵니다.
 
     if (list == null) {
       System.out.println("등록된 게시글이 없습니다.");
@@ -151,7 +152,7 @@ public class BoardHandler implements MenuHandler {
     }
 
     int index = -1;
-    Board[] list = boards.list(new Board[0]);
+    Board[] list = boards.toArray(new Board[0]);
 
     for (int i = 0; i < list.length; i++) {
       if (list[i].no == postNo) {
