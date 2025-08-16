@@ -8,11 +8,7 @@ public class MemberHandler implements MenuHandler {
 
   Scanner scanner;
 
-  private static final int MAX_SIZE = 100;
-
-  // Member 인스턴스 주소를 다을 레퍼런스 배열을 생성
-  private final Member[] members = new Member[MAX_SIZE];
-  private int size = 0;
+  private final MemberList members = new MemberList();
   private int nextNo = 1;
 
   MemberHandler(Scanner scanner) {
@@ -66,11 +62,6 @@ public class MemberHandler implements MenuHandler {
   }
 
   private void add() {
-    if (size >= MAX_SIZE) {
-      System.out.println("더 이상 회원을 추가할 수 없습니다.");
-      return;
-    }
-
     Member member = new Member();
 
     System.out.print("이름? ");
@@ -88,7 +79,7 @@ public class MemberHandler implements MenuHandler {
     member.no = nextNo++; // 1부터 시작하는 회원 번호 부여
     member.registeredDate = LocalDateTime.now(); // 가입일 저장
 
-    members[size++] = member; // 배열에 회원 정보를 담고 있는 인스턴스 주소를 저장
+    members.add(member);
 
     System.out.println("회원을 등록했습니다.");
   }
@@ -96,8 +87,8 @@ public class MemberHandler implements MenuHandler {
   private void list() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     System.out.println("번호\t이름\t전화번호\t\t등록일");
-    for (int i = 0; i < size; i++) {
-      Member m = members[i];
+    Member[] list = members.list();
+    for (Member m : list) {
       System.out.printf(
           "%d\t%s\t%s\t%s\n", m.no, m.name, m.phone, m.registeredDate.format(formatter));
     }
@@ -113,20 +104,19 @@ public class MemberHandler implements MenuHandler {
       return;
     }
 
-    int index = -1;
-    for (int i = 0; i < size; i++) {
-      if (members[i].no == inputNo) {
-        index = i;
+    Member member = null;
+    for (int i = 0; i < members.size(); i++) {
+      Member m = members.get(i);
+      if (m.no == inputNo) {
+        member = m;
         break;
       }
     }
 
-    if (index == -1) {
+    if (member == null) {
       System.out.println("해당 번호의 회원이 없습니다.");
       return;
     }
-
-    Member member = members[index];
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     System.out.printf("번호: %d\n", member.no);
@@ -147,9 +137,12 @@ public class MemberHandler implements MenuHandler {
     }
 
     int index = -1;
-    for (int i = 0; i < size; i++) {
-      if (members[i].no == inputNo) {
+    Member member = null;
+    for (int i = 0; i < members.size(); i++) {
+      Member m = members.get(i);
+      if (m.no == inputNo) {
         index = i;
+        member = m;
         break;
       }
     }
@@ -159,45 +152,43 @@ public class MemberHandler implements MenuHandler {
       return;
     }
 
-    Member member = members[index];
+    Member updatedMember = new Member();
+    updatedMember.no = member.no; // 기존 회원 번호 유지
+    updatedMember.name = member.name;
+    updatedMember.email = member.email;
+    updatedMember.phone = member.phone;
+    updatedMember.password = member.password;
+    updatedMember.registeredDate = member.registeredDate; // 기존 가입일 유지
 
-    String tempName = member.name;
-    String tempEmail = member.email;
-    String tempPhone = member.phone;
-    String tempPassword = member.password;
-
-    System.out.printf("이름(%s)? ", tempName);
+    System.out.printf("이름(%s)? ", updatedMember.name);
     String newName = scanner.nextLine();
     if (!newName.isEmpty()) {
-      tempName = newName;
+      updatedMember.name = newName;
     }
 
-    System.out.printf("이메일(%s)? ", tempEmail);
+    System.out.printf("이메일(%s)? ", updatedMember.email);
     String newEmail = scanner.nextLine();
     if (!newEmail.isEmpty()) {
-      tempEmail = newEmail;
+      updatedMember.email = newEmail;
     }
 
-    System.out.printf("전화번호(%s)? ", tempPhone);
+    System.out.printf("전화번호(%s)? ", updatedMember.phone);
     String newPhone = scanner.nextLine();
     if (!newPhone.isEmpty()) {
-      tempPhone = newPhone;
+      updatedMember.phone = newPhone;
     }
 
     System.out.print("암호(변경 시 입력)? ");
     String newPassword = scanner.nextLine();
     if (!newPassword.isEmpty()) {
-      tempPassword = newPassword;
+      updatedMember.password = newPassword;
     }
 
     System.out.print("정말 변경하시겠습니까? (yes/no) ");
     String answer = scanner.nextLine();
 
     if (answer.equalsIgnoreCase("yes")) {
-      member.name = tempName;
-      member.email = tempEmail;
-      member.phone = tempPhone;
-      member.password = tempPassword;
+      members.set(index, updatedMember);
       System.out.println("회원 정보를 변경했습니다.");
     } else {
       System.out.println("변경이 취소되었습니다.");
@@ -215,8 +206,9 @@ public class MemberHandler implements MenuHandler {
     }
 
     int index = -1;
-    for (int i = 0; i < size; i++) {
-      if (members[i].no == inputNo) {
+    for (int i = 0; i < members.size(); i++) {
+      Member m = members.get(i);
+      if (m.no == inputNo) {
         index = i;
         break;
       }
@@ -231,10 +223,7 @@ public class MemberHandler implements MenuHandler {
     String answer = scanner.nextLine();
 
     if (answer.equalsIgnoreCase("yes")) {
-      for (int i = index; i < size - 1; i++) {
-        members[i] = members[i + 1];
-      }
-      size--;
+      members.remove(index);
       System.out.println("회원을 삭제했습니다.");
     } else {
       System.out.println("삭제가 취소되었습니다.");
