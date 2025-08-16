@@ -97,3 +97,7 @@
 
 - MemberNode 클래스를 MemberLinkedList 클래스의 스태틱 중첩 클래스로 변경한다.
 - BoardNode 클래스를 BoardLinkedList 클래스의 스태틱 중첩 클래스로 변경한다.
+
+### 11. 다형성을 이용하여 MemberLinkedList 와 BoardLinkedList 클래스를 통합하기
+
+- MemberLinkedList 와 BoardLinkedList 클래스를 통합하여 LinkedList 클래스로 변경한다.
