@@ -101,3 +101,7 @@
 ### 11. 다형성을 이용하여 MemberLinkedList 와 BoardLinkedList 클래스를 통합하기
 
 - MemberLinkedList 와 BoardLinkedList 클래스를 통합하여 LinkedList 클래스로 변경한다.
+
+### 12. 제네릭을 이용하여 LinkedList 클래스를 일반화하기
+
+- LinkedList 클래스를 제네릭 클래스로 변경한다.

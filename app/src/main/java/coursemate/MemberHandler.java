@@ -8,7 +8,7 @@ public class MemberHandler implements MenuHandler {
 
   Scanner scanner;
 
-  private final LinkedList members = new LinkedList();
+  private final LinkedList<Member> members = new LinkedList<>();
   private int nextNo = 1;
 
   MemberHandler(Scanner scanner) {
@@ -86,10 +86,10 @@ public class MemberHandler implements MenuHandler {
 
   private void list() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    Member[] list = members.list(new Member[0]);
+
     System.out.println("번호\t이름\t전화번호\t\t등록일");
-    Object[] list = members.list();
-    for (Object item : list) {
-      Member m = (Member) item;
+    for (Member m : list) {
       System.out.printf(
           "%d\t%s\t%s\t%s\n", m.no, m.name, m.phone, m.registeredDate.format(formatter));
     }
@@ -107,7 +107,7 @@ public class MemberHandler implements MenuHandler {
 
     Member member = null;
     for (int i = 0; i < members.size(); i++) {
-      Member m = (Member) members.get(i);
+      Member m = members.get(i);
       if (m.no == inputNo) {
         member = m;
         break;
@@ -140,7 +140,7 @@ public class MemberHandler implements MenuHandler {
     int index = -1;
     Member member = null;
     for (int i = 0; i < members.size(); i++) {
-      Member m = (Member) members.get(i);
+      Member m = members.get(i);
       if (m.no == inputNo) {
         index = i;
         member = m;
@@ -208,7 +208,7 @@ public class MemberHandler implements MenuHandler {
 
     int index = -1;
     for (int i = 0; i < members.size(); i++) {
-      Member m = (Member) members.get(i);
+      Member m = members.get(i);
       if (m.no == inputNo) {
         index = i;
         break;
