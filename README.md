@@ -87,3 +87,8 @@
 
 - MemberHandler 에서 회원 데이터 목록을 다루는 코드를 MemberList 클래스로 분리한다.
 - BoardHandler 에서 게시글 데이터 목록을 다루는 코드를 BoardList 클래스로 분리한다.
+
+### 9. MemberList를 Linked List 자료구조로 변경하기
+
+- MemberList 클래스를 MemberLinkedList 클래스로 변경한다.
+- BoardList 클래스를 BoardLinkedList 클래스로 변경한다.
