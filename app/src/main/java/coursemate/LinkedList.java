@@ -2,11 +2,11 @@ package coursemate;
 
 public class LinkedList {
   private int size = 0;
-  private BoardNode head;
-  private BoardNode tail;
+  private Node head;
+  private Node tail;
 
   void add(Board board) {
-    BoardNode node = new BoardNode();
+    Node node = new Node();
     node.value = board;
 
     if (head == null) {
@@ -19,9 +19,9 @@ public class LinkedList {
     size++;
   }
 
-  Board[] list() {
-    Board[] result = new Board[size];
-    BoardNode node = head;
+  Object[] list() {
+    Object[] result = new Object[size];
+    Node node = head;
     for (int i = 0; i < size; i++) {
       result[i] = node.value;
       node = node.next;
@@ -29,12 +29,12 @@ public class LinkedList {
     return result;
   }
 
-  Board get(int i) {
+  Object get(int i) {
     if (i < 0 || i >= size) {
       return null; // 인덱스가 범위를 벗어나면 null 반환
     }
 
-    BoardNode node = head; // 처음 노드부터 시작
+    Node node = head; // 처음 노드부터 시작
     for (int x = 0; x < i; x++) {
       node = node.next; // i번째 노드로 이동
     }
@@ -42,15 +42,15 @@ public class LinkedList {
     return node.value; // 해당 노드의 값을 반환
   }
 
-  boolean set(int i, Board board) {
+  boolean set(int i, Object value) {
     if (i < 0 || i >= size) {
       return false; // 인덱스가 범위를 벗어나면 false 반환
     }
-    BoardNode node = head; // 처음 노드부터 시작
+    Node node = head; // 처음 노드부터 시작
     for (int x = 0; x < i; x++) {
       node = node.next; // i번째 노드로 이동
     }
-    node.value = board; // 해당 노드의 값을 변경
+    node.value = value; // 해당 노드의 값을 변경
 
     return true; // 설정 성공
   }
@@ -69,7 +69,7 @@ public class LinkedList {
       tail = tail.prev; // 마지막 노드 삭제 시 tail을 이전 노드로 이동
       tail.next = null; // 새로운 tail의 next를 null로 설정
     } else {
-      BoardNode node = head; // 처음 노드부터 시작
+      Node node = head; // 처음 노드부터 시작
       for (int x = 0; x < i; x++) {
         node = node.next; // i번째 노드로 이동
       }
@@ -84,9 +84,9 @@ public class LinkedList {
     return size; // 현재 저장된 게시글 수 반환
   }
 
-  private static class BoardNode {
-    public Board value;
-    public BoardNode next;
-    public BoardNode prev;
+  private static class Node {
+    public Object value;
+    public Node next;
+    public Node prev;
   }
 }
