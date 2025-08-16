@@ -2,6 +2,7 @@ package coursemate;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class MemberHandler implements MenuHandler {
@@ -86,7 +87,7 @@ public class MemberHandler implements MenuHandler {
 
   private void list() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    Member[] list = members.list(new Member[0]);
+    Member[] list = members.toArray(new Member[0]);
 
     System.out.println("번호\t이름\t전화번호\t\t등록일");
     for (Member m : list) {

@@ -105,3 +105,7 @@
 ### 12. 제네릭을 이용하여 LinkedList 클래스를 일반화하기
 
 - LinkedList 클래스를 제네릭 클래스로 변경한다.
+
+### 13. LinkedList 클래스를 Collection API 클래스로 교체하기
+
+- 자바의 Collection API 에서 제공하는 LinkedList 클래스를 사용한다.
