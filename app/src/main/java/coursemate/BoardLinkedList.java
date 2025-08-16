@@ -83,4 +83,10 @@ public class BoardLinkedList {
   int size() {
     return size; // 현재 저장된 게시글 수 반환
   }
+
+  private static class BoardNode {
+    public Board value;
+    public BoardNode next;
+    public BoardNode prev;
+  }
 }
